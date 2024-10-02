@@ -1,0 +1,19 @@
+{
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ],
+  "include": [
+    "src/**/*",
+    "src/env.d.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "allowJs": true
+}
