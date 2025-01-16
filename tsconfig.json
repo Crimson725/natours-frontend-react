@@ -10,7 +10,8 @@
   ],
   "include": [
     "src/**/*",
-    "src/env.d.ts"
+    "src/*.d.ts",
+    "types/**/*"
   ],
   "exclude": [
     "node_modules"

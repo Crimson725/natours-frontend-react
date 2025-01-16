@@ -1,7 +1,15 @@
-import { SERVER_BASE_URL } from "./constants/constans.ts";
-
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import User from "./contexts/userContext";
 const App = () => {
-  console.log(SERVER_BASE_URL);
+  const { isUserLoggedIn } = User();
+
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={isUserLoggedIn ? <Home /> : <Login />} />
+      </Routes>
+    </Router>
+  );
 };
 
 export default App;
