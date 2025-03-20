@@ -4,7 +4,9 @@ import { Tour } from "../types/Tour";
 
 interface TourResponseData<T> {
   status: "success" | "error" | string;
-  data: T;
+  data: {
+    data: T;
+  };
   message?: string;
 }
 
@@ -19,7 +21,7 @@ const getAllTours = async (): Promise<Tour[] | false> => {
       `${SERVER_BASE_URL}/api/v1/tours`,
     );
     if (tourData.status === "success") {
-      return tourData.data;
+      return tourData.data.data;
     }
   } catch (err: unknown) {
     console.log(err);
@@ -38,7 +40,7 @@ const getOneTour = async (tourName: string): Promise<Tour | false> => {
       `${SERVER_BASE_URL}/api/v1/tours/name/${tourName}`,
     );
     if (response.data.status === "success") {
-      return response.data.data;
+      return response.data.data.data;
     }
   } catch (err: unknown) {
     console.log(err);
@@ -67,7 +69,7 @@ const getBookedTours = async (): Promise<Tour[] | false> => {
       options,
     );
     if (response.data.status === "success") {
-      return response.data.data;
+      return response.data.data.data;
     }
   } catch (err: unknown) {
     console.log(err);

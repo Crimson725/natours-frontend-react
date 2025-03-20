@@ -13,10 +13,12 @@ import type { Tour } from "../../../types/Tour";
 const SingleTour = () => {
   const { tour: tourName } = useParams();
   const [tour, setTour] = useState<Tour>({} as Tour);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     (async () => {
       if (!tourName) return;
+      setIsLoading(true);
 
       const tourData = await getOneTour(tourName);
 
@@ -24,21 +26,20 @@ const SingleTour = () => {
         setTour(tourData);
         setPageTitle(`Natours | ${tourData.name}`);
       }
+      setIsLoading(false);
     })();
   }, [tourName]);
 
-  const tourDate = tour.startDates
-    ? new Date(tour.startDates[0]).toLocaleString("en-us", {
-        month: "long",
-        year: "numeric",
-      })
-    : "";
+  const tourDate =
+    tour.startDates && tour.startDates.length > 0
+      ? new Date(tour.startDates[0]).toLocaleString("en-us", {
+          month: "long",
+          year: "numeric",
+        })
+      : "Not available";
 
-  // There is no change in the data
-  // Thus, the whole html is put in the same file
-
-  if (Object.keys(tour).length === 0) {
-    return <></>;
+  if (isLoading || Object.keys(tour).length === 0) {
+    return <div className="loading">Loading...</div>;
   }
 
   return (
@@ -64,7 +65,7 @@ const SingleTour = () => {
             <div className="heading-box__detail">
               <FaMapMarkerAlt className="heading-box__icon" />
               <span className="heading-box__text">
-                {tour.startLocation?.description}
+                {tour.startLocation?.description || "Location not specified"}
               </span>
             </div>
           </div>
@@ -95,60 +96,73 @@ const SingleTour = () => {
             </div>
             <div className="overview-box__group">
               <h2 className="heading-secondary ma-bt-lg">Your tour guides</h2>
-              {tour.guides.map((guide) => (
-                <div className="overview-box__detail" key={guide._id}>
-                  <img
-                    className="overview-box__img"
-                    src={`${SERVER_BASE_URL}/img/users/${guide.photo}`}
-                    alt={guide.name}
-                  />
-                  <span className="overview-box__label">
-                    {guide.role === "lead-guide" ? "Lead Guide" : "Guide"}
-                  </span>
-                  <span className="overview-box__text">{guide.name}</span>
-                </div>
-              ))}
+              {tour.guides &&
+                tour.guides.map((guide) => (
+                  <div className="overview-box__detail" key={guide._id}>
+                    <img
+                      className="overview-box__img"
+                      src={`${SERVER_BASE_URL}/img/users/${guide.photo}`}
+                      alt={guide.name}
+                    />
+                    <span className="overview-box__label">
+                      {guide.role === "lead-guide" ? "Lead Guide" : "Guide"}
+                    </span>
+                    <span className="overview-box__text">{guide.name}</span>
+                  </div>
+                ))}
             </div>
           </div>
         </div>
         <div className="description-box">
           <h2 className="heading-secondary ma-bt-lg">About {tour.name} tour</h2>
-          {tour.description.split("\n").map((paragraph, i) => (
-            <p className="description__text" key={i}>
-              {paragraph}
-            </p>
-          ))}
+          {tour.description &&
+            tour.description.split("\n").map((paragraph, i) => (
+              <p className="description__text" key={i}>
+                {paragraph}
+              </p>
+            ))}
         </div>
       </section>
 
       <section className="section-pictures">
-        {tour.images.map((picture, i) => (
-          <div className="picture-box" key={i}>
-            <img
-              src={`${SERVER_BASE_URL}/img/tours/${picture}`}
-              alt={`${tour.name} ${i + 1}`}
-              className={`picture-box__img picture-box__img--${i + 1}`}
-            />
-          </div>
-        ))}
+        {tour.images &&
+          tour.images.map((picture, i) => (
+            <div className="picture-box" key={i}>
+              <img
+                src={`${SERVER_BASE_URL}/img/tours/${picture}`}
+                alt={`${tour.name} ${i + 1}`}
+                className={`picture-box__img picture-box__img--${i + 1}`}
+              />
+            </div>
+          ))}
       </section>
 
       <section className="section-map">
-        <TourMap locationData={tour.locations} mapId={"map"} />
+        {tour.locations && tour.locations.length > 0 && (
+          <TourMap locationData={tour.locations} mapId={"map"} />
+        )}
       </section>
 
       <section className="section-reviews">
         <div className="reviews">
-          {tour.reviews.map((review) => (
-            <TourReviewCard
-              review={{ ...review, id: review._id }}
-              key={review._id}
-            />
-          ))}
+          {tour.reviews &&
+            tour.reviews.map((review) => (
+              <TourReviewCard
+                review={{
+                  id: review._id,
+                  review: review.review,
+                  rating: review.rating,
+                  user: review.user,
+                }}
+                key={review._id}
+              />
+            ))}
         </div>
       </section>
 
-      <TourCta tourImages={tour.images} tourId={tour.id} />
+      {tour.images && tour.id && (
+        <TourCta tourImages={tour.images} tourId={tour.id} />
+      )}
     </>
   );
 };

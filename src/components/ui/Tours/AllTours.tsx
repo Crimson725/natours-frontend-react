@@ -16,10 +16,29 @@ const AllTours = () => {
 
     // Get all tours
     (async () => {
-      const tours = await getAllTours();
+      const toursResponse = await getAllTours();
 
       setTimeout(() => setLoadingTours(false), 1000);
-      if (tours) setAllTours(tours);
+
+      if (toursResponse) {
+        // Check if toursResponse is an object with a data property containing an array
+        if (
+          typeof toursResponse === "object" &&
+          toursResponse.data &&
+          Array.isArray(toursResponse.data)
+        ) {
+          setAllTours(toursResponse.data);
+        }
+        // Check if toursResponse itself is an array
+        else if (Array.isArray(toursResponse)) {
+          setAllTours(toursResponse);
+        } else {
+          console.error("Unexpected tours data format:", toursResponse);
+          setAllTours([]);
+        }
+      } else {
+        setAllTours([]);
+      }
     })();
   }, []);
 

@@ -20,7 +20,7 @@ const showMap = (mapId: string): L.Map | undefined => {
     return;
   }
   const map: L.Map = L.map(mapId).setView([51.505, -0.09], 8);
-  L.tileLayer("https://.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
     updateWhenZooming: false,
     maxZoom: 18,
     minZoom: 4,

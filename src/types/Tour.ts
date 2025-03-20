@@ -5,6 +5,8 @@ export interface Location {
   type: string;
   coordinates: number[];
   day?: number;
+  _id?: string;
+  id?: string;
 }
 
 export interface StartLocation extends Location {
@@ -13,6 +15,7 @@ export interface StartLocation extends Location {
 
 export interface Tour {
   id: string;
+  _id?: string;
   name: string;
   slug: string;
   duration: number;
@@ -25,12 +28,13 @@ export interface Tour {
   description: string;
   imageCover: string;
   images: string[];
-  startDates: Date[];
+  startDates: string[];
   startLocation: StartLocation;
   locations: Location[];
   guides: Array<{
     _id: string;
     name: string;
+    email?: string;
     role: string;
     photo: string;
   }>;
@@ -38,15 +42,28 @@ export interface Tour {
     _id: string;
     review: string;
     rating: number;
-    user: User;
+    user: {
+      _id: string;
+      name: string;
+      photo: string;
+    };
+    tour?: string;
+    createdAt?: string;
+    id?: string;
   }>;
+  secretTour?: boolean;
+  durationWeeks?: number;
 }
 
 export interface TourReview {
   id: string;
   review: string;
   rating: number;
-  user: User;
+  user: {
+    _id: string;
+    name: string;
+    photo: string;
+  };
 }
 
 export interface TourReviewCardProps {
