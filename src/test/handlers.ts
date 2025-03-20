@@ -1,5 +1,5 @@
 import { rest } from 'msw';
-import { SERVER_BASE_URL } from '../constants/constants';
+import { SERVER_BASE_URL } from '../constants/Constants';
 
 const testUser = {
   _id: 'test-user-id',

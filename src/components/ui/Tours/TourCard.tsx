@@ -5,7 +5,7 @@ import {
   FaRegFlag,
   FaRegUser,
 } from "react-icons/fa";
-import { SERVER_BASE_URL } from "../../../constants/constants";
+import { SERVER_BASE_URL } from "../../../constants/Constants";
 import { TourCardProps } from "../../../types/Tour";
 
 const TourCard = ({ tourData }: TourCardProps) => {

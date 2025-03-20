@@ -2,7 +2,7 @@ import { FormEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import FormGroup from "../ui/FormGroup";
 import { userLogin } from "../../api/auth";
-import User from "../../contexts/userContext";
+import User from "../../contexts/UserContext";
 
 interface LoginFormData {
   email: string;

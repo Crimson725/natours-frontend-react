@@ -1,6 +1,7 @@
-import { SERVER_BASE_URL } from "../constants/constants.js";
+import { SERVER_BASE_URL } from "../constants/Constants.js";
 import { CustomError, handleErrorAlert, showAlert } from "../utils/alert.ts";
 import axios, { AxiosResponse } from "axios";
+import { User } from "../types/User";
 
 type UpdateType = "password" | "data";
 
@@ -14,13 +15,7 @@ interface UpdatePasswordData {
   newPassword: string;
 }
 
-type UpdateData = UpdatePasswordData | UpdateUserData;
-
-interface User {
-  id: string;
-  name: string;
-  email: string;
-}
+type UpdateData = UpdateUserData | UpdatePasswordData;
 
 interface UpdateResponse {
   status: "success" | "fail" | string;
@@ -35,10 +30,12 @@ interface UpdateResponse {
  * @param type The type of update, either "password" or "data"
  * @returns A promise that resolves to the updated User object if successful; otherwise, undefined
  */
-const updateSettings = async (
-  data: UpdateData,
-  type: UpdateType,
-): Promise<User | undefined> => {
+async function updateSettings(data: UpdatePasswordData, type: "password"): Promise<User | undefined>;
+async function updateSettings(data: UpdateUserData | FormData, type: "data"): Promise<User | undefined>;
+async function updateSettings(
+  data: UpdateData | FormData,
+  type: UpdateType
+): Promise<User | undefined> {
   try {
     const url =
       type === "password"

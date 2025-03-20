@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { SERVER_BASE_URL } from "../constants/constants.js";
+import { SERVER_BASE_URL } from "../constants/Constants.js";
 import { CustomError, handleErrorAlert } from "../utils/alert.ts";
 
 interface BookingResponse {

@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { SERVER_BASE_URL } from "../constants/constants.js";
+import { SERVER_BASE_URL } from "../constants/Constants.js";
 import { Tour } from "../types/Tour";
 
 interface TourResponseData<T> {

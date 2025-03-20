@@ -6,7 +6,7 @@ import TourOverviewBox from "./TourOverviewBox";
 import TourReviewCard from "./TourReviewCard";
 import TourMap from "./TourMap";
 import TourCta from "./TourCTA";
-import { SERVER_BASE_URL } from "../../../constants/constants";
+import { SERVER_BASE_URL } from "../../../constants/Constants";
 import { setPageTitle } from "../../../utils/pageHead";
 import type { Tour } from "../../../types/Tour";
 

@@ -1,8 +1,8 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import User from "../../../contexts/userContext";
+import User from "../../../contexts/UserContext";
 import { userLogout } from "../../../api/auth";
-import { SERVER_BASE_URL } from "../../../constants/constants";
+import { SERVER_BASE_URL } from "../../../constants/Constants";
 import logo from "../../assets/img/logo-white.png";
 
 const Header: React.FC = () => {

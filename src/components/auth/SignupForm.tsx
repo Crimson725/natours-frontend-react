@@ -2,7 +2,7 @@ import { FormEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import FormGroup from "../ui/FormGroup";
 import { userSignup } from "../../api/auth";
-import User from "../../contexts/userContext";
+import User from "../../contexts/UserContext";
 
 interface SignupFormData {
   name: string;

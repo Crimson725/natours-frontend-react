@@ -1,5 +1,5 @@
 import { FaRegStar } from "react-icons/fa";
-import { SERVER_BASE_URL } from "../../../constants/constants";
+import { SERVER_BASE_URL } from "../../../constants/Constants";
 import { TourReviewCardProps } from "../../../types/Tour";
 
 const TourReviewCard = ({ review }: TourReviewCardProps) => {
