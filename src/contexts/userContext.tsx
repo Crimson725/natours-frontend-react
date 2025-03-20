@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useReducer, ReactNode } from "react";
-import type { User } from "../types/user";
+import type { User } from "../types/User";
 
 const EMPTY_USER_OBJECT = {
   userInfo: {
@@ -94,6 +94,12 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({
   );
 };
 
-const User = () => useContext(UserContext);
+const User = () => {
+  const context = useContext(UserContext);
+  if (context === undefined) {
+    throw new Error("useUser must be used within a UserProvider");
+  }
+  return context;
+};
 
 export default User;

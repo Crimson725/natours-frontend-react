@@ -4,25 +4,28 @@ import { FaRegClock, FaMapMarkerAlt } from "react-icons/fa";
 import { getOneTour } from "../../../api/tours";
 import TourOverviewBox from "./TourOverviewBox";
 import TourReviewCard from "./TourReviewCard";
-import TourMap from "../map/TourMap";
-import TourCta from "./TourCta";
+import TourMap from "./TourMap";
+import TourCta from "./TourCTA";
 import { SERVER_BASE_URL } from "../../../constants/constants";
 import { setPageTitle } from "../../../utils/pageHead";
+import type { Tour } from "../../../types/Tour";
 
 const SingleTour = () => {
   const { tour: tourName } = useParams();
-  const [tour, setTour] = useState({});
+  const [tour, setTour] = useState<Tour>({} as Tour);
 
   useEffect(() => {
     (async () => {
+      if (!tourName) return;
+
       const tourData = await getOneTour(tourName);
 
       if (tourData) {
-        setTour(tourData.data);
-        setPageTitle(`Natours | ${tourData.data.name}`);
+        setTour(tourData);
+        setPageTitle(`Natours | ${tourData.name}`);
       }
     })();
-  }, []);
+  }, [tourName]);
 
   const tourDate = tour.startDates
     ? new Date(tour.startDates[0]).toLocaleString("en-us", {
@@ -137,7 +140,10 @@ const SingleTour = () => {
       <section className="section-reviews">
         <div className="reviews">
           {tour.reviews.map((review) => (
-            <TourReviewCard review={review} key={review._id} />
+            <TourReviewCard
+              review={{ ...review, id: review._id }}
+              key={review._id}
+            />
           ))}
         </div>
       </section>

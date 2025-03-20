@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { SERVER_BASE_URL } from "../constants/constants.js";
 import { handleErrorAlert, showAlert, CustomError } from "../utils/alert.ts";
-import { User } from "../types/user";
+import { User } from "../types/User";
 
 interface AuthResponseData<T> {
   status: "success" | "error" | "fail";
