@@ -1,5 +1,8 @@
 {
   "files": [],
+  "compilerOptions": {
+    "allowJs": true
+  },
   "references": [
     {
       "path": "./tsconfig.app.json"
@@ -15,6 +18,5 @@
   ],
   "exclude": [
     "node_modules"
-  ],
-  "allowJs": true
+  ]
 }
