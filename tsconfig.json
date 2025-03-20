@@ -2,7 +2,9 @@
   "files": [],
   "compilerOptions": {
     "allowJs": true,
-    "baseUrl": "./src"
+    "baseUrl": "./src",
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
   },
   "references": [
     {
