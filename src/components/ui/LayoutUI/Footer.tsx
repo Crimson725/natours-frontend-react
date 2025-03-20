@@ -1,4 +1,4 @@
-import logoGreen from "../../assets/img/logo-green.png";
+import logoGreen from "../../../assets/img/logo-green.png";
 
 interface FooterProps {
   className?: string;
