@@ -1,8 +1,8 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import AllTours from "./Tours/AllTours";
-import BookedTours from "./Tours/BookedTours";
-import SingleTour from "./Tours/SingleTour";
-import UserProfile from "../userprofiles/UserProfile";
+import AllTours from "./Tours/AllTours.tsx";
+import BookedTours from "./Tours/BookedTours.tsx";
+import SingleTour from "./Tours/SingleTour.tsx";
+import UserProfile from "../userprofiles/UserProfile.tsx";
 
 const Main = () => {
   return (

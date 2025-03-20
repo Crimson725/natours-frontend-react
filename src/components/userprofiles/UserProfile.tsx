@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import User from "../../contexts/UserContext";
-import { setPageTitle } from "../../utils/pageHead";
-import SideNavItem from "../ui/LayoutUI/SideNavItem";
-import UserAccountSettings from "./UserAccountSettings";
-import UserPasswordUpdate from "./UserPasswordUpdate";
+import User from "../../contexts/UserContext.tsx";
+import { setPageTitle } from "../../utils/pageHead.ts";
+import SideNavItem from "../ui/LayoutUI/SideNavItem.tsx";
+import UserAccountSettings from "./UserAccountSettings.tsx";
+import UserPasswordUpdate from "./UserPasswordUpdate.tsx";
 
 const UserProfile = () => {
   const { userInfo } = User();

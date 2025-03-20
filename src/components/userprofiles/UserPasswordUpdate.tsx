@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { updateSettings } from "../../api/userSettings";
-import FormGroup from "../ui/FormGroup";
+import { updateSettings } from "../../api/userSettings.ts";
+import FormGroup from "../ui/FormGroup.tsx";
 
 const UserPasswordUpdate = () => {
   const [currentPassword, setCurrentPassword] = useState("");

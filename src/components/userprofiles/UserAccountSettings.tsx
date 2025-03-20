@@ -1,8 +1,8 @@
 import { useRef, useState } from "react";
-import { updateSettings } from "../../api/userSettings";
-import FormGroup from "../ui/FormGroup";
-import User from "../../contexts/UserContext";
-import { SERVER_BASE_URL } from "../../constants/Constants";
+import { updateSettings } from "../../api/userSettings.ts";
+import FormGroup from "../ui/FormGroup.tsx";
+import User from "../../contexts/UserContext.tsx";
+import { SERVER_BASE_URL } from "../../constants/Constants.ts";
 
 const UserAccountSettings = ({ userInfo }: { userInfo: User }) => {
   const [name, setName] = useState(userInfo.name);

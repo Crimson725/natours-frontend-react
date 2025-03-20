@@ -1,10 +1,10 @@
 import { Routes, Route } from "react-router-dom";
-import ErrorPage from "./ErrorPage";
+import ErrorPage from "./ErrorPage.tsx";
 
-import Login from "../components/auth/LoginForm";
-import Signup from "../components/auth/SignupForm";
-import AllTours from "../components/ui/Tours/AllTours";
-import SingleTour from "../components/ui/Tours/SingleTour";
+import Login from "../components/auth/LoginForm.tsx";
+import Signup from "../components/auth/SignupForm.tsx";
+import AllTours from "../components/ui/Tours/AllTours.tsx";
+import SingleTour from "../components/ui/Tours/SingleTour.tsx";
 
 const LoginSignup = () => {
   return (

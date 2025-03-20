@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { FaRegClock, FaMapMarkerAlt } from "react-icons/fa";
 import { getOneTour } from "../../../api/tours";
-import TourOverviewBox from "./TourOverviewBox";
-import TourReviewCard from "./TourReviewCard";
-import TourMap from "./TourMap";
-import TourCta from "./TourCTA";
-import { SERVER_BASE_URL } from "../../../constants/Constants";
-import { setPageTitle } from "../../../utils/pageHead";
-import type { Tour } from "../../../types/Tour";
+import TourOverviewBox from "./TourOverviewBox.tsx";
+import TourReviewCard from "./TourReviewCard.tsx";
+import TourMap from "./TourMap.tsx";
+import TourCta from "./TourCTA.tsx";
+import { SERVER_BASE_URL } from "../../../constants/Constants.ts";
+import { setPageTitle } from "../../../utils/pageHead.ts";
+import type { Tour } from "../../../types/Tour.ts";
 
 const SingleTour = () => {
   const { tour: tourName } = useParams();

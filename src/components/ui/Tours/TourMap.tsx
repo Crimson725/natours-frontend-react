@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { setMarker, showMap } from "../../../api/leaflet";
-import { Location } from "../../../types/Tour";
+import { setMarker, showMap } from "../../../api/leaflet.ts";
+import { Location } from "../../../types/Tour.ts";
 import L from "leaflet";
 
 interface TourMapProps {

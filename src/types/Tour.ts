@@ -1,4 +1,3 @@
-import { User } from "./User";
 
 export interface Location {
   description: string;

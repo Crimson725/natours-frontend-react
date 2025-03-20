@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useReducer, ReactNode } from "react";
-import type { User } from "../types/User";
+import type { User } from "../types/User.ts";
 
 const EMPTY_USER_OBJECT = {
   userInfo: {

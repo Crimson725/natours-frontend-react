@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { bookTour } from "../../../api/stripe";
-import { SERVER_BASE_URL } from "../../../constants/Constants";
-import User from "../../../contexts/UserContext";
+import { bookTour } from "../../../api/stripe.ts";
+import { SERVER_BASE_URL } from "../../../constants/Constants.ts";
+import User from "../../../contexts/UserContext.tsx";
 
 const TourCta = ({
   tourImages,
