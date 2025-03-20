@@ -1,15 +1,7 @@
 import axios, { AxiosResponse } from "axios";
-import { SERVER_BASE_URL } from "../constants/constans.js";
+import { SERVER_BASE_URL } from "../constants/constants.js";
 import { handleErrorAlert, showAlert, CustomError } from "../utils/alert.ts";
-
-interface User {
-  id: string;
-  name: string;
-  email: string;
-  photo: string;
-  role: "user" | "guide" | "lead-guide" | "admin";
-  active: boolean;
-}
+import { User } from "../types/user";
 
 interface AuthResponseData<T> {
   status: "success" | "error" | "fail";
@@ -47,6 +39,7 @@ const userSignup = async (formData: FormData): Promise<User | undefined> => {
     handleErrorAlert(err as CustomError);
   }
 };
+
 /**
  * Log in a user
  * @param email The email of the user
@@ -79,10 +72,11 @@ const userLogin = async (
     } else {
       showAlert("error", loginData.message || "Something went wrong!");
     }
-  } catch (err: CustomError) {
-    handleErrorAlert(err);
+  } catch (err) {
+    handleErrorAlert(err as CustomError);
   }
 };
+
 const userLogout = async (): Promise<boolean | undefined> => {
   try {
     const response: AxiosResponse<AuthResponseData<null>> = await axios.get(
@@ -100,4 +94,5 @@ const userLogout = async (): Promise<boolean | undefined> => {
     handleErrorAlert(err as CustomError);
   }
 };
+
 export { userSignup, userLogin, userLogout };

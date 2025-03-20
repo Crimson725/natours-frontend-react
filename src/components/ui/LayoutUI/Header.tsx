@@ -1,17 +1,18 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useUser } from "../../contexts/userContext";
-import { userLogout } from "../../api/auth";
-import { SERVER_BASE_URL } from "../../constants/constans";
+import User from "../../../contexts/userContext";
+import { userLogout } from "../../../api/auth";
+import { SERVER_BASE_URL } from "../../../constants/constants";
 import logo from "../../assets/img/logo-white.png";
 
 const Header: React.FC = () => {
-  const { user, isLoggedIn, removeUser } = useUser();
+  const userContext = User();
+  const { userInfo, isUserLoggedIn, removeUser } = userContext || {};
   const navigate = useNavigate();
 
   const handleLogout = () => {
     userLogout();
-    removeUser();
+    removeUser?.();
     navigate("/login");
   };
 
@@ -28,7 +29,7 @@ const Header: React.FC = () => {
       </div>
 
       <nav className="nav nav--user">
-        {isLoggedIn ? (
+        {isUserLoggedIn ? (
           <>
             <button className="nav__el nav__el--logout" onClick={handleLogout}>
               Log out
@@ -36,10 +37,10 @@ const Header: React.FC = () => {
             <Link className="nav__el" to="/me">
               <img
                 className="nav__user-img"
-                src={`${SERVER_BASE_URL}/img/users/${user.photo}`}
-                alt={user.name.split(" ")[0]}
+                src={`${SERVER_BASE_URL}/img/users/${userInfo?.photo}`}
+                alt={userInfo?.name?.split(" ")[0]}
               />
-              <span>{user.name.split(" ")[0]}</span>
+              <span>{userInfo?.name?.split(" ")[0]}</span>
             </Link>
           </>
         ) : (

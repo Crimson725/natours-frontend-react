@@ -1,12 +1,5 @@
-import React, { createContext, useContext, useState, ReactNode } from "react";
-
-interface User {
-  _id: string;
-  name: string;
-  email: string;
-  photo: string;
-  role: string;
-}
+import React, { createContext, useContext, useReducer, ReactNode } from "react";
+import type { User } from "../types/user";
 
 const EMPTY_USER_OBJECT = {
   userInfo: {
@@ -14,13 +7,26 @@ const EMPTY_USER_OBJECT = {
     name: "",
     email: "",
     photo: "",
-    role: "",
+    role: "user" as const,
   },
 };
 
 const INITIAL_USER_STATE = JSON.parse(
   localStorage.getItem("userInfo") || JSON.stringify(EMPTY_USER_OBJECT),
 );
+
+const USER_REDUCER_ACTION_TYPES = {
+  SET_USER_INFO: "SET_USER_INFO",
+} as const;
+
+type UserState = {
+  userInfo: User;
+};
+
+type UserAction = {
+  type: typeof USER_REDUCER_ACTION_TYPES.SET_USER_INFO;
+  payload: UserState;
+};
 
 interface UserContextType {
   userInfo: User;
@@ -31,20 +37,42 @@ interface UserContextType {
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
+const userReducer = (state: UserState, action: UserAction): UserState => {
+  const { type, payload } = action;
+
+  switch (type) {
+    case USER_REDUCER_ACTION_TYPES.SET_USER_INFO:
+      return { ...state, ...payload };
+
+    default:
+      throw new Error(`Undefined reducer action type: ${type} in userReducer`);
+  }
+};
+
 export const UserProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [userInfo, setUserState] = useState<User>(INITIAL_USER_STATE.userInfo);
+  const [{ userInfo }, dispatch] = useReducer(userReducer, INITIAL_USER_STATE);
 
   const setUserInfo = (data: User) => {
     localStorage.setItem("userInfo", JSON.stringify({ userInfo: data }));
-    setUserState(data);
+
+    dispatch({
+      type: USER_REDUCER_ACTION_TYPES.SET_USER_INFO,
+      payload: {
+        userInfo: data,
+      },
+    });
   };
 
   const removeUser = () => {
     localStorage.removeItem("userInfo");
     localStorage.removeItem("jwt");
-    setUserState(EMPTY_USER_OBJECT.userInfo);
+
+    dispatch({
+      type: USER_REDUCER_ACTION_TYPES.SET_USER_INFO,
+      payload: EMPTY_USER_OBJECT,
+    });
   };
 
   const isUserLoggedIn = localStorage.getItem("jwt") ? true : false;
@@ -66,11 +94,6 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({
   );
 };
 
-const User = () => {
-  const context = useContext(UserContext);
-  if (context === undefined) {
-    throw new Error("useUser must be used within a UserProvider");
-  }
-  return context;
-};
+const User = () => useContext(UserContext);
+
 export default User;

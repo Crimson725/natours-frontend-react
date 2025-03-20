@@ -1,12 +1,6 @@
 import axios, { AxiosResponse } from "axios";
-import { SERVER_BASE_URL } from "../constants/constans.ts";
-
-interface Tour {
-  id: string;
-  name: string;
-  duration: number;
-  price: number;
-}
+import { SERVER_BASE_URL } from "../constants/constants.js";
+import { Tour } from "../types/Tour";
 
 interface TourResponseData<T> {
   status: "success" | "error" | string;
@@ -21,16 +15,17 @@ interface TourResponseData<T> {
  */
 const getAllTours = async (): Promise<Tour[] | false> => {
   try {
-    const response: AxiosResponse<TourResponseData<Tour[]>> = await axios.get(
+    const {data:tourData}: AxiosResponse<TourResponseData<Tour[]>> = await axios.get(
       `${SERVER_BASE_URL}/api/v1/tours`,
     );
-    if (response.data.status === "success") {
-      return response.data.data;
+    if (tourData.status === "success") {
+      return tourData.data;
     }
   } catch (err: unknown) {
     console.log(err);
     return false;
   }
+  return false;
 };
 /**
  * Get a single tour by its name
@@ -49,6 +44,7 @@ const getOneTour = async (tourName: string): Promise<Tour | false> => {
     console.log(err);
     return false;
   }
+  return false;
 };
 /**
  * Get all tours that the current user has booked
@@ -77,6 +73,7 @@ const getBookedTours = async (): Promise<Tour[] | false> => {
     console.log(err);
     return false;
   }
+  return false;
 };
 
 export { getAllTours, getOneTour, getBookedTours };

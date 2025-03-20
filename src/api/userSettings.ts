@@ -1,4 +1,4 @@
-import { SERVER_BASE_URL } from "../constants/constans.ts";
+import { SERVER_BASE_URL } from "../constants/constants.js";
 import { CustomError, handleErrorAlert, showAlert } from "../utils/alert.ts";
 import axios, { AxiosResponse } from "axios";
 

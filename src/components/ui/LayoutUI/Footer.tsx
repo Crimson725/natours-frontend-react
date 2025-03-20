@@ -1,11 +1,16 @@
 import logoGreen from "../../assets/img/logo-green.png";
-import React from "react";
 
-const Footer: React.FC = () => {
+interface FooterProps {
+  className?: string;
+}
+
+const Footer = ({ className = "" }: FooterProps) => {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer className="footer">
+    <footer className={`footer ${className}`.trim()}>
       <div className="footer__logo">
-        <img src={logoGreen} alt="Natour logo" />
+        <img src={logoGreen} alt="Natours logo" />
       </div>
       <ul className="footer__nav">
         <li>
@@ -24,8 +29,9 @@ const Footer: React.FC = () => {
           <a href="#">Contact</a>
         </li>
       </ul>
-      <p className="footer__copyright">© by Natours 2024.</p>
+      <p className="footer__copyright">© by Natours {currentYear}</p>
     </footer>
   );
 };
+
 export default Footer;

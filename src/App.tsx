@@ -1,15 +1,13 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Header from "./components/ui/LayoutUI/Header";
 import User from "./contexts/userContext";
+import "./App.css";
 const App = () => {
   const { isUserLoggedIn } = User();
 
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={isUserLoggedIn ? <Home /> : <Login />} />
-      </Routes>
-    </Router>
+    <>
+      <Header />
+    </>
   );
 };
-
 export default App;
