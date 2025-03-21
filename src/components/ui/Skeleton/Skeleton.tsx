@@ -1,4 +1,4 @@
-import "./skeleton.css";
+import "./Skeleton.css";
 
 interface SkeletonProps {
   height: string;
