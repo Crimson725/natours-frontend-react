@@ -1,18 +1,26 @@
+import { Suspense, lazy } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import AllTours from "./Tours/AllTours.tsx";
-import BookedTours from "./Tours/BookedTours.tsx";
-import SingleTour from "./Tours/SingleTour.tsx";
-import UserProfile from "../userprofiles/UserProfile.tsx";
+
+// Lazy load components
+const AllTours = lazy(() => import("./Tours/AllTours.tsx"));
+const BookedTours = lazy(() => import("./Tours/BookedTours.tsx"));
+const SingleTour = lazy(() => import("./Tours/SingleTour.tsx"));
+const UserProfile = lazy(() => import("../userprofiles/UserProfile.tsx"));
+
+// Loading fallback component
+const LoadingFallback = () => <div className="loading">Loading...</div>;
 
 const Main = () => {
   return (
-    <Routes>
-      <Route path="/" element={<AllTours />} />
-      <Route path="/my-tours" element={<BookedTours />} />
-      <Route path="/me" element={<UserProfile />} />
-      <Route path="/tour/:tour" element={<SingleTour />} />
-      <Route path="*" element={<Navigate to="/" />} />
-    </Routes>
+    <Suspense fallback={<LoadingFallback />}>
+      <Routes>
+        <Route path="/" element={<AllTours />} />
+        <Route path="/my-tours" element={<BookedTours />} />
+        <Route path="/me" element={<UserProfile />} />
+        <Route path="/tour/:tour" element={<SingleTour />} />
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
+    </Suspense>
   );
 };
 

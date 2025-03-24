@@ -10,6 +10,24 @@ The frontend for the Natours application.
 - **Testing**: Vitest, React Testing Library
 - **Icon Library**: React Icons
 - **Development Tools**: ESLint, Prettier, TypeScript
+- **Performance Optimization**: Code Splitting with React.lazy and Suspense
+
+## Performance Optimizations
+
+### Code Splitting
+
+This application uses code splitting to improve loading performance by:
+
+- Lazy loading route components with React.lazy() and Suspense
+- Organizing code chunks for optimal caching and loading
+- Implementing a reusable LazyLoad utility component
+- Custom Vite build configuration for better chunk management
+
+The code splitting strategy breaks the application into several main chunks:
+- Vendor libraries (React, React Router)
+- UI Components
+- Tour-related components
+- Authentication components
 
 ## Getting Started
 

@@ -1436,3 +1436,14 @@ body {
 .form__text .btn-text {
     margin-left: 0.5rem;
 }
+
+/* Loading Fallback */
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  font-size: 1.5rem;
+  color: #55c57a;
+  font-weight: bold;
+}
