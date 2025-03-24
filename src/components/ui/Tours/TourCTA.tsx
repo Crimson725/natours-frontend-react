@@ -60,11 +60,16 @@ const TourCta = ({
               className="btn btn--green span-all-rows"
               data-tour-id={tourId}
               onClick={buyTour}
+              aria-label="Book this tour now"
             >
               {creatingCheckout === true ? "Processing..." : "Book tour now!"}
             </button>
           ) : (
-            <Link className="btn btn--green span-all-rows" to="/login">
+            <Link
+              className="btn btn--green span-all-rows"
+              to="/login"
+              aria-label="Log in to book this tour"
+            >
               Log in to book tour
             </Link>
           )}

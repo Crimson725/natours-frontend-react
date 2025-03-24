@@ -31,7 +31,11 @@ const Header: React.FC = () => {
       <nav className="nav nav--user">
         {isUserLoggedIn ? (
           <>
-            <button className="nav__el nav__el--logout" onClick={handleLogout}>
+            <button
+              className="nav__el nav__el--logout"
+              onClick={handleLogout}
+              aria-label="Log out from your account"
+            >
               Log out
             </button>
             <Link className="nav__el" to="/me">

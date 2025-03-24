@@ -154,7 +154,12 @@ const SignupForm = () => {
         minLength={8}
       />
       <div className="form__group">
-        <button type="submit" className="btn btn--green" disabled={isLoading}>
+        <button
+          type="submit"
+          className="btn btn--green"
+          disabled={isLoading}
+          aria-label="Create your account"
+        >
           {isLoading ? "Creating account..." : "Sign up"}
         </button>
       </div>

@@ -103,7 +103,12 @@ const LoginForm = () => {
         minLength={8}
       />
       <div className="form__group">
-        <button type="submit" className="btn btn--green" disabled={isLoading}>
+        <button
+          type="submit"
+          className="btn btn--green"
+          disabled={isLoading}
+          aria-label="Submit login form"
+        >
           {isLoading ? "Logging in..." : "Login"}
         </button>
       </div>
